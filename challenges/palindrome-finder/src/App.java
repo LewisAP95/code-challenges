@@ -13,17 +13,24 @@ public class App {
         //Make an arraylist to export the comfirmed pairs
         ArrayList<String> palindromePairs = new ArrayList<String>();
 
+        //Arraylist to store already checked unique pairs in
+        ArrayList<String> checkedList = new ArrayList<String>();
+
         //For each word in the list, loop through the list again so that every pair is checked
         for(int i = 0; i < wordList.length; i++){
             for(int j = 0; j < wordList.length; j++){
                 if(wordList[i] == wordList[j]){
                     //Skip comparing words to themselves
                     ;
-                }else{
+
+                //Only performs the comparing step if the pair of words are NOT found in the list of already checked pairs
+                }else if(!checkedList.contains(wordList[i]+wordList[j])){
                     //Pass the current pair out to the palindrome checker, add their indices to the result list if the check comes back true
                     if(palindromeCheck(wordList[i], wordList[j])){
                         palindromePairs.add(String.format("(%s, %s)", i, j));
                     }
+                    //Regardless of if the pair is palindromic or not, adds them to the list of unique pairs checked
+                    checkedList.add(wordList[i]+wordList[j]);
                 }
             }
         }

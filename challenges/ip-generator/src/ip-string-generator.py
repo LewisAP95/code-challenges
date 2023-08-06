@@ -15,13 +15,9 @@ def main():
         for second_block in range(1, 4):
             for third_block in range(1, 4):
                 for fourth_block in range(1, 4):
-                    new_ip_blocks.append([first_block, second_block, third_block, fourth_block])
-
-    valid_ips = []
-    for ip_block in new_ip_blocks:
-        if sum(ip_block) == len(source_digits):
-            valid_ips.append(ip_block)   
-    new_ip_blocks = valid_ips 
+                    block = [first_block, second_block, third_block, fourth_block]
+                    if sum(block) == len(source_digits):
+                        new_ip_blocks.append(block)
 
     for ip_block in new_ip_blocks:
         new_ip = []

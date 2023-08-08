@@ -11,7 +11,17 @@
 #Implement your own version of reduce.
 
 def __main__():
-    print("r")
+    test_list = [1, 2, 3, 4, 5]
+    print(reduce(test_list, add, 0))
+    
+def reduce(lst, func, init = 0):
+    for i in range(len(lst)):
+        init = func(init, lst[i])
+    return init
+
+#Function to test our reduce
+def add(a, b):
+    return a + b
 
 if __name__ == "__main__":
     __main__()

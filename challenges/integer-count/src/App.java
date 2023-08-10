@@ -3,23 +3,24 @@
 
 public class App {
     public static void main(String[] args) throws Exception {
-        int[] source_array = {2, 4, 6, 8, 10, 2, 6, 10};
+        int[] sourceArray = {2, 4, 6, 8, 10, 2, 6, 10};
+        countInstances(sourceArray);
+    }
 
+    public static void countInstances(int[] sourceArray){
         //Loop through the array, make a flag to track if any duplicates have been found
-        for(int i = 0; i < source_array.length; i++){
+        for(int i = 0; i < sourceArray.length; i++){
             boolean dupe = false;
             //Loop through it again, if a matching value is found at any point that is not the original index, raise the dupe flag
-            for(int j = 0; j < source_array.length; j++){
-                if(source_array[j] == source_array[i]){
-                    if(j != i){
-                        dupe =  true;
-                        break;
-                    }
+            for(int j = 0; j < sourceArray.length; j++){
+                if(sourceArray[j] == sourceArray[i] && j != i){
+                    dupe =  true;
+                    break;
                 }
             }
             //Report the value at the current index as the only instance if no dupes were found
             if(!dupe){
-                System.out.println(String.format("Element '%s' appears only once in the given array.", source_array[i]));
+                System.out.println(String.format("Element '%s' appears only once in the given array.", sourceArray[i]));
             }
         }
     }

@@ -13,6 +13,8 @@ def __main__():
     stack.push("8", 2)
     stack.push("9", 3)
     stack.show()
+
+    # Showing that removal works correctly
     print(f"Removed: {stack.pop(1)}")
     stack.show()
     print(f"Removed: {stack.pop(2)}")

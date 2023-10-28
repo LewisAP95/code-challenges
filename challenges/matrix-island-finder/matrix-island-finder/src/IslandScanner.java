@@ -8,13 +8,7 @@ public class IslandScanner {
         for(int row = 0; row < islandMatrix.length; row++){
             for(int col = 0; col < islandMatrix[row].length; col++){
                 if(islandMatrix[row][col] == 1){
-                    boolean isFound = false;
-                    for(int[] found : foundList){
-                        if(found[0] == row && found[1] == col){
-                            isFound = true;
-                        }
-                    }
-                    if(!isFound){
+                    if(!listCheck(row, col, foundList)){
                         spreadScan(row, col, foundList, islandMatrix);
                         islandCount++;
                     }
@@ -29,68 +23,48 @@ public class IslandScanner {
         int[] cell = {cellRow, cellCol};
         foundList.add(cell);
 
-        //Up
-        int upDir = cellRow - 1;
-        if(upDir >= 0){
-            if(islandMatrix[upDir][cellCol] == 1){
-                boolean isFound = false;
-                for(int[] found : foundList){
-                    if(found[0] == upDir && found[1] == cellCol){
-                        isFound = true;
-                    }
-                }
-                if(!isFound){
-                    spreadScan(upDir, cellCol, foundList, islandMatrix);
-                }
-            }
-        }
+        int newRow = cellRow;
+        int newCol = cellCol;
+        for(int i = 0; i < 4; i++){
+            switch(i){
+                case 0:
+                newRow = cellRow - 1;
+                newCol = cellCol;
+                break;
 
-        //Down
-        int downDir = cellRow + 1;
-        if(downDir < islandMatrix.length){
-            if(islandMatrix[downDir][cellCol] == 1){
-                boolean isFound = false;
-                for(int[] found : foundList){
-                    if(found[0] == downDir && found[1] == cellCol){
-                        isFound = true;
-                    }
-                }
-                if(!isFound){
-                    spreadScan(downDir, cellCol, foundList, islandMatrix);
-                }
-            }
-        }
+                case 1:
+                newRow = cellRow + 1;
+                newCol = cellCol;
+                break;
 
-        //Left
-        int leftDir = cellCol - 1;
-        if(leftDir >= 0){
-            if(islandMatrix[cellRow][leftDir] == 1){
-                boolean isFound = false;
-                for(int[] found : foundList){
-                    if(found[0] == cellRow && found[1] == leftDir){
-                        isFound = true;
-                    }
-                }
-                if(!isFound){
-                    spreadScan(cellRow, leftDir, foundList, islandMatrix);
-                }
-            }
-        }
+                case 2:
+                newRow = cellRow;
+                newCol = cellCol - 1;
+                break;
 
-        //Right
-        int rightDir = cellCol + 1;
-        if(rightDir < islandMatrix[0].length){
-            if(islandMatrix[cellRow][rightDir] == 1){
-                boolean isFound = false;
-                for(int[] found : foundList){
-                    if(found[0] == cellRow && found[1] == rightDir){
-                        isFound = true;
-                    }
+                case 3:
+                newRow = cellRow;
+                newCol = cellCol + 1;
+                break;
+            }
+
+            try{
+                if(islandMatrix[newRow][newCol] == 1 && !listCheck(newRow, newCol, foundList)){
+                    spreadScan(newRow, newCol, foundList, islandMatrix);
                 }
-                if(!isFound){
-                    spreadScan(cellRow, rightDir, foundList, islandMatrix);
-                }
+            }catch(ArrayIndexOutOfBoundsException e){
+                continue;
             }
         }
+    }
+
+    private boolean listCheck(int cellRow, int cellCol, ArrayList<int[]> foundList){
+        boolean isFound = false;
+        for(int[] innerList : foundList){
+            if(innerList[0] == cellRow && innerList[1] == cellCol){
+                isFound = true;
+            }
+        }
+        return isFound;
     }
 }

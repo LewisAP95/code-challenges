@@ -3,6 +3,7 @@
 
 public class App {
     public static void main(String[] args) throws Exception {
+
         int[][] islandMatrix = {
             {1, 0, 0, 0, 0},
             {0, 0, 1, 1, 0},
@@ -10,9 +11,8 @@ public class App {
             {0, 0, 0, 0, 0},
             {1, 1, 0, 0, 1},
             {1, 1, 0, 0, 1}};
-        IslandScanner scanner = new IslandScanner();
-        int islands = scanner.getIslands(islandMatrix);
-        System.out.println(String.format("Within the given matrix %d islands were found.", islands));
 
+        IslandScanner scanner = new IslandScanner();
+        System.out.println(String.format("Within the given matrix %d islands were found.", scanner.getIslands(islandMatrix)));
     }
 }

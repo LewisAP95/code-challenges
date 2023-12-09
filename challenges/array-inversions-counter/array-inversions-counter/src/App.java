@@ -14,11 +14,7 @@ public class App {
         int[] sourceArray2 = {5, 4, 3, 2, 1};
         inversionCounter ic = new inversionCounter();
 
-        int[] sr1o = ic.count(sourceArray1);
-        
-        for(int x : sr1o){
-            System.out.println(x);
-        }
-        
+        System.out.println(ic.count(sourceArray1));
+        System.out.println(ic.count(sourceArray2));
     }
 }
